@@ -1,0 +1,12 @@
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\bin\Debug\MyClass.dll.config
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\bin\Debug\MyClass.dll
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\bin\Debug\MyClass.pdb
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\bin\Debug\EntityFramework.dll
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\bin\Debug\EntityFramework.xml
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\obj\Debug\MyClass.csproj.AssemblyReference.cache
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\obj\Debug\MyClass.dll
+C:\Users\truongvodich11\Desktop\ASPNET\PTUDW\63CNTT4N2\MyClass\obj\Debug\MyClass.pdb
