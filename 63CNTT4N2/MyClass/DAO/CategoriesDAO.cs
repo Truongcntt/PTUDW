@@ -16,6 +16,7 @@ namespace MyClass.DAO
         {
             return db.Categories.ToList();
         }
+        
         public List<Categories> getList(string status = "All")//Statust 1,2 : hien thi ;0 an di
         {
             List<Categories> list = null;
@@ -38,6 +39,12 @@ namespace MyClass.DAO
                     }
             }
             return list;
+        }
+        //create
+        public int Insert(Categories row)
+        {
+            db.Categories.Add(row);
+            return db.SaveChanges();
         }
     }
 }

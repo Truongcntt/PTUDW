@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using MyClass.Model;
 using MyClass.DAO;
+using UDW.Library;
 
 namespace _63CNTT4N2.Areas.Admin.Controllers
 {
@@ -38,28 +39,55 @@ namespace _63CNTT4N2.Areas.Admin.Controllers
         //    return View(categories);
         //}
 
-        //// GET: Admin/Category/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        // GET: Admin/Category/Create
+        public ActionResult Create()
+        {
+            ViewBag.CatList = new SelectList(categoriesDAO.getList("Index"),"Id","Name");
+            ViewBag.OrderList = new SelectList(categoriesDAO.getList("Index"), "Order", "Name");
+            return View();
+        }
 
-        //// POST: Admin/Category/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Create([Bind(Include = "Id,Name,Slug,ParenId,Order,MetaDesc,MetaKey,CreateBy,CreateAt,UpdateBy,UpdateAt,Status")] Categories categories)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Categories.Add(categories);
-        //        await db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: Admin/Category/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Categories categories)
+        {
+            if (ModelState.IsValid)
+            {
+                //Xử lý một sô trường tự động
+                //CreateAt
+                categories.CreateAt=DateTime.Now;
+                //UpdateAt
+                categories.UpdateAt= DateTime.Now;
+                //CreateBy
+                categories.CreateBy = Convert.ToInt32(Session["UserID"]);
+                //UpdateBy
+                categories.UpdateBy = Convert.ToInt32(Session["UserID"]);
+                //Slug
+                categories.Slug = XString.Str_Slug(categories.Name);
+                //ParentId
+                if (categories.ParenId == null)
+                {
+                    categories.ParenId = 0;
+                }
+                //Oder
+                if (categories.Order == null)
+                {
+                    categories.Order = 1;
+                }
+                else
+                {
+                    categories.Order  +=1;
+                }
+                //Thêm mới dòng dữ liệu
+                categoriesDAO.Insert(categories);
+                return RedirectToAction("Index");
+            }
 
-        //    return View(categories);
-        //}
+            return View(categories);
+        }
 
         //// GET: Admin/Category/Edit/5
         //public async Task<ActionResult> Edit(int? id)
