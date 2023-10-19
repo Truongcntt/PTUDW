@@ -1,6 +1,7 @@
 ﻿using MyClass.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,24 @@ namespace MyClass.DAO
         public int Insert(Categories row)
         {
             db.Categories.Add(row);
+            return db.SaveChanges();
+        }
+        //tim kiếm mẫu tin bất kỳ
+        public Categories getRow(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+            else
+            {
+                return db.Categories.Find(id);
+            }
+        }
+        //update DB
+        public int Update(Categories row)
+        {
+            db.Entry(row).State = EntityState.Modified;
             return db.SaveChanges();
         }
     }

@@ -5,6 +5,23 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+@section header {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+
+    <link rel="stylesheet" href="~/Public/css/jquery.dataTables.min.css" />
+}
+
+
+
+@section footer {
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="~/Public/js/jquery.dataTables.min.js"></script>
+    <script>let table = new DataTable('#myTable');</script>
+}
+
+
+@*<h2>Index</h2>*@
 <div class="wrapper">
     <!-- Main Sidebar Container -->
     <!-- Content Wrapper. Contains page content -->
@@ -14,63 +31,67 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
+                    @*<h3 class="card-title">Title</h3>*@
                     <div class="row">
                         <div class="col-md-6">
-                            <strong class="text-danger">Danh mục loại sản phẩm</strong>
+                            <strong class="text-danger">DANH MỤC SẢN PHẨM</strong>
                         </div>
 
                         <div class="col-md-6 text-right">
-                            <a href="@Url.Action("Create","Category")" class="btn-sm btn-success"><i class="fa fa-plus"></i>Thêm mới</a>
-                            <a href="@Url.Action("Trash","Category")" class="btn-sm btn-danger"><i class="fa fa-trash"></i>Thùng rác</a>
+                            <a href="@Url.Action("Create","Category")" class="btn-sm btn-success"><i class="fa fa-plus"></i> Thêm mới</a>
+                            <a href="@Url.Action("Trash","Category")" class="btn-sm btn-danger"><i class="fa fa-trash"></i> Thùng rác</a>
+
+                            @*@Html.ActionLink("Tạo mới", "Create")*@
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <tr>
-                            <th>@Html.DisplayNameFor(model => model.Id)</th>
-                            <th>@Html.DisplayNameFor(model => model.Name)</th>
-                            <th>@Html.DisplayNameFor(model => model.Slug)</th>
-                            <th>@Html.DisplayNameFor(model => model.ParenId)</th>
-                            <th>@Html.DisplayNameFor(model => model.Order)</th>
-                            <th>Chức Năng</th>
-                            <th></th>
-                        </tr>
+                    @*dong hien thi thong bao*@
+                    @Html.Partial("Message")
 
-                        @foreach (var item in Model)
-                        {
+                    <table class="table table-bordered table-striped" , id="myTable">
+                        <thead>
+
+
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Slug)</td>
-                                <td> @Html.DisplayFor(modelItem => item.ParenId)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Order)</td>
-                                <td>
-                                    @if (item.Status==1)
-                                    {
-                                        <a href="@Url.Action("Status","Category",new { id = item.Id })" class="btn-sm btn-success"><i class="fa fa-toggle-on"></i></a>
-
-                                    }
-                                    else
-                                    {
-                                        <a href="@Url.Action("Status","Category",new { id = item.Id })" class="btn-sm btn-danger"><i class="fa fa-toggle-off"></i></a>
-
-                                    }
-                                    <a href="@Url.Action("Edit","Category",new { id = item.Id })" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="@Url.Action("Details","Category", new { id = item.Id })" class="btn-sm btn-info"><i class="fa fa-eye"></i></a>
-                                    <a href="@Url.Action("Delete","Category", new { id = item.Id })" class="btn-sm btn-danger"><i class="fa fa-trash"></i> </a>
-                                </td>
+                                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                                <th>@Html.DisplayNameFor(model => model.Slug)</th>
+                                <th>@Html.DisplayNameFor(model => model.ParenId)</th>
+                                <th>@Html.DisplayNameFor(model => model.Order)</th>
+                                <th>Chức năng</th>
                             </tr>
-                        }
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model) // đây là vòng lặp for
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Slug)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ParenId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Order)</td>
+                                    <td>
+                                        @if (item.Status == 1)
+                                        {
+                                            <a href="@Url.Action("Status","Category", new { id = item.Id })" class="btn-sm btn-success"><i class="fa fa-toggle-on"></i></a>
 
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("Status","Category", new { id = item.Id })" class="btn-sm btn-danger"><i class="fa fa-toggle-off"></i></a>
+
+                                        }
+                                        <a href="@Url.Action("Edit","Category", new { id = item.Id })" class="btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                        <a href="@Url.Action("Details","Category", new { id = item.Id })" class="btn-sm btn-info"><i class="fa fa-eye"></i></a>
+                                        <a href="@Url.Action("Delete","Category", new { id = item.Id })" class="btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
                     </table>
                 </div> <!-- /.card-footer-->
             </div><!-- /.card -->
         </section><!-- /.content -->
     </div> <!-- /.content-wrapper -->
 </div><!-- ./wrapper -->
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
