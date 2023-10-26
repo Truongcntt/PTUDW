@@ -1,7 +1,16 @@
-﻿@if (TempData.ContainsKey("message")) {
+﻿@*@if (TempData.ContainsKey("message"))
+{
     _63CNTT4N2.Library.XMessage message = (_63CNTT4N2.Library.XMessage)TempData["message"];
     <div class="alert alert -@message.TypeMsg">
         @message.Msg
     </div>
-}
+}*@
+@if (TempData.ContainsKey("message"))
+{
+    _63CNTT4N2.Library.XMessage message = (_63CNTT4N2.Library.XMessage)TempData["message"];
+    string alertClass = message.TypeMsg == "success" ? "alert-success" : "alert-danger";
 
+    <div class="alert @alertClass">
+        @message.Msg
+    </div>
+}
