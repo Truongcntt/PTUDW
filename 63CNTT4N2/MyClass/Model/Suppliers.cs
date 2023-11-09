@@ -19,8 +19,8 @@ namespace MyClass.Model
         public string Name { get; set; }
 
 
-        [Display(Name = "Logo")]
-        public string Img { get; set; }
+        [Display(Name = "Logo NCC")]
+        public string Image { get; set; }
 
 
         [Display(Name = "Tên rút gọn")]
@@ -34,7 +34,7 @@ namespace MyClass.Model
         [Display(Name = "Tên đầy đủ")]
         public string FullName { get; set; }
 
-        [Display(Name = "Điện thoại")]
+        [Display(Name = "Số Điện thoại")]
         public string Phone { get; set; }
 
 
