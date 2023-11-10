@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-12" })
                                     <div class="col-md-10">
-                                        @Html.TextAreaFor(model => model.FullName, new { @class = "form-control", @row = "5" })
+                                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-12" })
                                     <div class="col-md-10">
-                                        @Html.TextAreaFor(model => model.URL, new { @class = "form-control", @row = "5" })
+                                        @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.MetaDesc, htmlAttributes: new { @class = "control-label col-md-12" })
                                     <div class="col-md-10">
-                                        @Html.TextAreaFor(model => model.MetaDesc, new { @class = "form-control", @row = "5" })
+                                        @Html.EditorFor(model => model.MetaDesc, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.MetaDesc, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.MetaKey, htmlAttributes: new { @class = "control-label col-md-12" })
                                     <div class="col-md-10">
-                                        @Html.TextAreaFor(model => model.MetaKey, new { @class = "form-control", @row = "5" })
+                                        @Html.EditorFor(model => model.MetaKey, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.MetaKey, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
