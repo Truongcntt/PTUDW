@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MyClass.Model.Products>
 
 @{
-    ViewBag.Title = "Trang chủ nhà cung cấp";
+    ViewBag.Title = "Trang chủ danh mụ sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -31,11 +31,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <strong class="text-danger">DANH MỤC NHÀ CUNG CẤP</strong>
+                            <strong class="text-danger">DANH MỤC SẢN PHẨM</strong>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a href="@Url.Action("Create","Supplier")" class="btn-sm btn-success"><i class="fa fa-plus"> Thêm</i></a>
-                            <a href="@Url.Action("Trash","Supplier")" class="btn-sm btn-danger"><i class="fa fa-trash"> Thùng rác</i></a>
+                            <a href="@Url.Action("Create","Product")" class="btn-sm btn-success"><i class="fa fa-plus"> Thêm</i></a>
+                            <a href="@Url.Action("Trash","Product")" class="btn-sm btn-danger"><i class="fa fa-trash"> Thùng rác</i></a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.SupplierID)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Qty)</td>
-                                    <td><img src="~/Public/img/supplier/@item.Img" alt="Img" class="img-fluid" /></td>
+                                    <td><img src="~/Public/img/product/@item.Img" alt="Img" class="img-fluid" /></td>
                                     <td>
                                         @if (item.Status == 1)
                                         {

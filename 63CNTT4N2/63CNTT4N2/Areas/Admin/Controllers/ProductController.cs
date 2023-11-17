@@ -48,8 +48,8 @@ namespace _63CNTT4N2.Areas.Admin.Controllers
         // GET: Admin/Product/Create
         public ActionResult Create()
         {
-            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "ID", "Name");
-            ViewBag.ListSupID = new SelectList(suppliersDAO.getList("Index"), "CarID", "Name");
+            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");
+            ViewBag.ListSupID = new SelectList(suppliersDAO.getList("Index"), "Id", "Name");
             // dung delua chon tu danh sach droplist nhu bang Categories : ParentID va Supplier :ParentID
             return View();
         }
@@ -97,8 +97,8 @@ namespace _63CNTT4N2.Areas.Admin.Controllers
                 TempData["message"] = new XMessage("success", "Tạo mới sản phẩm thành công");
                 return RedirectToAction("Index");
             }
-            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "ID", "Name");
-            ViewBag.ListSupID = new SelectList(suppliersDAO.getList("Index"), "CarID", "Name");
+            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");
+            ViewBag.ListSupID = new SelectList(suppliersDAO.getList("Index"), "Id", "Name");
             return View(products);
         }
 
@@ -118,6 +118,8 @@ namespace _63CNTT4N2.Areas.Admin.Controllers
                 TempData["message"] = new XMessage("danger", "Không tồn tại sản phẩm");
                 return RedirectToAction("Index");
             }
+            ViewBag.ListCatID = new SelectList(categoriesDAO.getList("Index"), "Id", "Name");
+            ViewBag.ListSupID = new SelectList(suppliersDAO.getList("Index"), "Id", "Name");
             return View(products);
         }
 
