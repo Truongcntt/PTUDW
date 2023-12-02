@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using _63CNTT4N2.App_Start;
 using _63CNTT4N2.Library;
 using MyClass.DAO;
 using MyClass.Model;
@@ -14,6 +15,7 @@ using UDW.Library;
 
 namespace _63CNTT4N2.Areas.Admin.Controllers
 {
+    [Role]
     public class SupplierController : Controller
     {
         SuppliersDAO suppliersDAO = new SuppliersDAO();

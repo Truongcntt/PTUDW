@@ -6,12 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using _63CNTT4N2.App_Start;
 using _63CNTT4N2.Library;
 using MyClass.DAO;
 using MyClass.Model;
 
 namespace _63CNTT4N2.Areas.Admin.Controllers
 {
+    [Role]
     public class MenuController : Controller
     {
         CategoriesDAO categoriesDAO = new CategoriesDAO();
@@ -232,58 +234,61 @@ namespace _63CNTT4N2.Areas.Admin.Controllers
             return View(menus);
         }
 
-        // GET: Admin/Menu/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Menu/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,TableID,TypeMenu,Position,Link,ParentID,Order,CreateAt,CreateBy,UpdateAt,UpdateBy,Status")] Menus menus)
-        {
-            if (ModelState.IsValid)
-            {
-                menusDAO.Insert(menus);
-                return RedirectToAction("Index");
-            }
-
-            return View(menus);
-        }
 
         // GET: Admin/Menu/Edit/5
         public ActionResult Edit(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Menus menus = menusDAO.getRow(id);
+
             if (menus == null)
             {
                 return HttpNotFound();
             }
-            return View(menus);
+            return View("Edit", menus);
         }
 
-        // POST: Admin/Menu/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,TableID,TypeMenu,Position,Link,ParentID,Order,CreateAt,CreateBy,UpdateAt,UpdateBy,Status")] Menus menus)
+        public ActionResult Edit(Menus menus)
         {
             if (ModelState.IsValid)
             {
+
+                if (menus.ParentId == null)
+                {
+                    menus.ParentId = 0;
+                }
+                if (menus.Order == null)
+                {
+                    menus.Order = 1;
+                }
+                else
+                {
+                    menus.Order += 1;
+                }
+
+                //Xy ly cho muc UpdateAt
+                menus.UpdateAt = DateTime.Now;
+
+                //Xy ly cho muc UpdateBy
+                menus.UpdateBy = Convert.ToInt32(Session["UserId"]);
+
+                //Thong bao thanh cong
+                TempData["message"] = new XMessage("success", "Cập nhật thành công");
+
+                //Cap nhat du lieu
                 menusDAO.Update(menus);
+
                 return RedirectToAction("Index");
             }
             return View(menus);
         }
-
         // GET: Admin/Menu/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -299,14 +304,82 @@ namespace _63CNTT4N2.Areas.Admin.Controllers
             return View(menus);
         }
 
-        // POST: Admin/Menu/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Menus menus = menusDAO.getRow(id);
+
+            //tim thay mau tin thi xoa, cap nhat cho Links
             menusDAO.Delete(menus);
-            return RedirectToAction("Index");
+
+            //Thong bao thanh cong
+            TempData["message"] = new XMessage("success", "Xóa menu thành công");
+            //O lai trang thung rac
+            return RedirectToAction("Trash");
+        }
+        public ActionResult DelTrash(int? id)
+        {
+            //khi nhap nut thay doi Status cho mot mau tin
+            Menus menus = menusDAO.getRow(id);
+
+            //thay doi trang thai Status tu 1,2 thanh 0
+            menus.Status = 0;
+
+            //cap nhat gia tri cho UpdateAt/By
+            menus.UpdateBy = Convert.ToInt32(Session["UserId"].ToString());
+            menus.UpdateAt = DateTime.Now;
+
+            //Goi ham Update trong MenusDAO
+            menusDAO.Update(menus);
+
+            //Thong bao thanh cong
+            TempData["message"] = new XMessage("success", "Xóa Menu thành công");
+
+            //khi cap nhat xong thi chuyen ve Index
+            return RedirectToAction("Index", "Menu");
+        }
+        public ActionResult Trash(int? id)
+        {
+            return View(menusDAO.getList("Trash"));
+        }
+        public ActionResult Undo(int? id)
+        {
+            if (id == null)
+            {
+                //Thong bao that bai
+                TempData["message"] = new XMessage("danger", "Phục hồi menu thất bại");
+                //chuyen huong trang
+                return RedirectToAction("Index", "Page");
+            }
+
+            //khi nhap nut thay doi Status cho mot mau tin
+            Menus menus = menusDAO.getRow(id);
+            //kiem tra id cua menus co ton tai?
+            if (menus == null)
+            {
+                //Thong bao that bai
+                TempData["message"] = new XMessage("danger", "Phục hồi menu thất bại");
+
+                //chuyen huong trang
+                return RedirectToAction("Index");
+            }
+            //thay doi trang thai Status = 2
+            menus.Status = 2;
+
+            //cap nhat gia tri cho UpdateAt/By
+            menus.UpdateBy = Convert.ToInt32(Session["UserId"].ToString());
+            menus.UpdateAt = DateTime.Now;
+
+            //Goi ham Update trong menusDAO
+            menusDAO.Update(menus);
+
+            //Thong bao thanh cong
+            TempData["message"] = new XMessage("success", "Phục hồi menu thành công");
+
+            //khi cap nhat xong thi chuyen ve Trash de phuc hoi tiep
+            return RedirectToAction("Trash");
         }
     }
 }

@@ -11,9 +11,11 @@ using MyClass.DAO;
 using _63CNTT4N2.Library;
 using UDW.Library;
 using System.IO;
+using _63CNTT4N2.App_Start;
 
 namespace _63CNTT4N2.Areas.Admin.Controllers
 {
+    [Role]
     public class ProductController : Controller
     {
         ProductsDAO productsDAO = new ProductsDAO();

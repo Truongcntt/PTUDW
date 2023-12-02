@@ -11,9 +11,11 @@ using MyClass.Model;
 using MyClass.DAO;
 using UDW.Library;
 using _63CNTT4N2.Library;
+using _63CNTT4N2.App_Start;
 
 namespace _63CNTT4N2.Areas.Admin.Controllers
 {
+    [Role]
     public class CategoryController : Controller
     {
         CategoriesDAO categoriesDAO = new CategoriesDAO();

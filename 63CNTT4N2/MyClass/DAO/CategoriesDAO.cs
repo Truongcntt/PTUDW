@@ -59,6 +59,8 @@ namespace MyClass.DAO
                 return db.Categories.Find(id);
             }
         }
+
+
         //update DB
         public int Update(Categories row)
         {
