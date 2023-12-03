@@ -28,7 +28,7 @@ namespace _63CNTT4N2.Areas.Admin.Controllers
             if (user != null && user.Password == password)
             {
                 SessionConfig.SetUser(user);
-                Session["UserId"] = user.Id;
+                Session["UserID"] = user.Id;
                 Session["Username"] = user.Username;
                 return RedirectToAction("Index", "Dashboard");
             }
